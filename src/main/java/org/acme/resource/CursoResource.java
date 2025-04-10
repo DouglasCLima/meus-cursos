@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import jakarta.ws.rs.PathParam;
 
 import java.net.URI;
 import java.util.List;
