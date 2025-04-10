@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
 
 @Entity
 @Schema(description = "Representa uma escola que oferece cursos")
