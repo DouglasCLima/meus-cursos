@@ -6,6 +6,7 @@ Projeto API de Gerenciamento de Cursos
 Este projeto é uma API RESTful desenvolvida com Quarkus, com o objetivo de gerenciar cursos, escolas e linguagens aprendidas. O sistema permite cadastro, atualização e listagem dessas entidades, além de implementar recursos avançados como idempotência, autenticação via chave de API, rate limiting, validações, e documentação OpenAPI.
 
 🚀 Tecnologias Utilizadas
+
 Java 17+
 
 Quarkus 3.x
@@ -25,6 +26,7 @@ JSON-B (serialização)
 Maven
 
 📦 Funcionalidades Implementadas
+
 1. CRUD Completo
    Escolas: criação, listagem, atualização e remoção
 
@@ -32,8 +34,10 @@ Cursos: com associação a escolas e suporte a datas
 
 Linguagens Aprendidas: com enumeração de níveis
 
+
 2. Recursos Avançados de API
-   ✅ Idempotência para requisições POST (evita duplicações acidentais)
+   
+✅ Idempotência para requisições POST (evita duplicações acidentais)
 
 ✅ Autenticação via chave de API (API Key baseada em filtro)
 
@@ -50,6 +54,7 @@ Linguagens Aprendidas: com enumeração de níveis
 ✅ Documentação Swagger/OpenAPI totalmente gerada via anotações
 
 🔑 Autenticação com API Key
+
 Cada requisição a rotas protegidas deve conter o cabeçalho:
 
 vbnet
@@ -59,6 +64,7 @@ Authorization: Api-Key SUA_CHAVE_AQUI
 As chaves são gerenciadas manualmente ou via endpoint (se implementado).
 
 ⛔ Rate Limiting
+
 Limite configurado por IP para evitar abuso da API
 
 Cabeçalhos retornados:
@@ -71,6 +77,7 @@ X-RateLimit-Remaining: 95
 Excesso de requisições retorna HTTP 429 Too Many Requests
 
 🔁 Idempotência
+
 Para garantir que um POST não seja executado duas vezes por engano, use o cabeçalho:
 
 makefile
@@ -80,6 +87,7 @@ Idempotency-Key: um_valor_unico
 Se a mesma chave for usada novamente, a API retorna a mesma resposta da primeira requisição.
 
 🌐 Documentação da API
+
 A interface Swagger UI está disponível em:
 
 bash
@@ -89,6 +97,7 @@ http://localhost:8080/q/swagger-ui
 Todos os endpoints estão documentados com exemplos, parâmetros, e códigos de resposta.
 
 📁 Estrutura do Projeto
+
 bash
 Copiar
 Editar
@@ -109,6 +118,7 @@ Editar
 Acesse: http://localhost:8080/q/swagger-ui
 
 📌 Endpoints Principais
+
 Método	Rota	Descrição
 GET	/api/v1/cursos	Lista todos os cursos
 POST	/api/v1/cursos	Cadastra novo curso (idempotente)
@@ -118,7 +128,9 @@ GET	/api/v1/escolas	Lista todas as escolas
 POST	/api/v1/linguagens	Cadastra nova linguagem aprendida
 
 🧪 Testes (opcional)
+
 Testes podem ser adicionados com JUnit e RestAssured.
 
 📃 Licença
+
 Este projeto é apenas para fins acadêmicos e de aprendizado. Não possui licença comercial.
