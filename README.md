@@ -1,151 +1,125 @@
 
 # Cursos Realizados API
 
-API RESTful desenvolvida com **Quarkus** para gerenciar cursos realizados, suas respectivas escolas e linguagens aprendidas. Projeto final do curso de Desenvolvimento de APIs com Quarkus.
 
-## 🔧 Tecnologias
+Projeto API de Gerenciamento de Cursos
+Este projeto é uma API RESTful desenvolvida com Quarkus, com o objetivo de gerenciar cursos, escolas e linguagens aprendidas. O sistema permite cadastro, atualização e listagem dessas entidades, além de implementar recursos avançados como idempotência, autenticação via chave de API, rate limiting, validações, e documentação OpenAPI.
 
-- Java 11
-- Quarkus
-- Hibernate ORM + Panache
-- Banco de dados H2
-- Bean Validation
-- OpenAPI/Swagger
-- Maven
+🚀 Tecnologias Utilizadas
+Java 17+
 
----
+Quarkus 3.x
 
-## 📦 Como executar o projeto
+Hibernate ORM com Panache
 
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/DouglasCLima/meus-cursos.git
-   cd meus-cursos
-   ```
+H2 Database (em memória)
 
-2. **Execute com Quarkus dev mode**
-   ```bash
-   ./mvnw compile quarkus:dev
-   ```
+Bean Validation (Jakarta Validation)
 
-3. **Acesse o Swagger UI**
-   ```
-   http://localhost:8080/q/swagger-ui
-   ```
+OpenAPI / Swagger UI
 
----
+RESTEasy Reactive
 
-## 🗂️ Estrutura das Entidades
+JSON-B (serialização)
 
-### 🏫 Escola
-- `id`: Long
-- `nome`: String
-- `local`: String
-- `site`: String
+Maven
 
-### 📘 Curso
-- `id`: Long
-- `nome`: String
-- `descricao`: String
-- `cargaHoraria`: Integer
-- `dataConclusao`: LocalDate
-- `escola`: Escola (Many-to-One)
-- `linguagensAprendidas`: List<LinguagemAprendida> (Many-to-Many)
+📦 Funcionalidades Implementadas
+1. CRUD Completo
+   Escolas: criação, listagem, atualização e remoção
 
-### 💻 LinguagemAprendida
-- `id`: Long
-- `nome`: String
-- `tipo`: Enum (BACKEND, FRONTEND, FULLSTACK, MOBILE, DATABASE)
-- `descricao`: String
+Cursos: com associação a escolas e suporte a datas
 
----
+Linguagens Aprendidas: com enumeração de níveis
 
-## 🔗 Relacionamentos
+2. Recursos Avançados de API
+   ✅ Idempotência para requisições POST (evita duplicações acidentais)
 
-- **Curso** possui uma **Escola** (Many-to-One)
-- **Curso** possui muitas **LinguagensAprendidas** (Many-to-Many)
+✅ Autenticação via chave de API (API Key baseada em filtro)
 
----
+✅ Rate Limiting configurado por IP e endpoint
 
-## 📌 Endpoints
+✅ CORS configurado para acesso de domínios específicos
 
-Cada entidade possui ao menos 5 endpoints REST:
+✅ Versionamento de API via URL (/api/v1/)
 
-### Escola
-- `GET /escolas`
-- `GET /escolas/{id}`
-- `POST /escolas`
-- `PUT /escolas/{id}`
-- `DELETE /escolas/{id}`
-- `GET /escolas/busca?nome={nome}`
+✅ Validações robustas com mensagens de erro claras
 
-### Curso
-- `GET /cursos`
-- `GET /cursos/{id}`
-- `POST /cursos`
-- `PUT /cursos/{id}`
-- `DELETE /cursos/{id}`
-- `GET /cursos/por-escola/{idEscola}`
+✅ Tratamento global de exceções
 
-### LinguagemAprendida
-- `GET /linguagens`
-- `GET /linguagens/{id}`
-- `POST /linguagens`
-- `PUT /linguagens/{id}`
-- `DELETE /linguagens/{id}`
-- `GET /linguagens/por-tipo/{tipo}`
+✅ Documentação Swagger/OpenAPI totalmente gerada via anotações
 
----
+🔑 Autenticação com API Key
+Cada requisição a rotas protegidas deve conter o cabeçalho:
 
-## 📂 Coleção Postman
+vbnet
+Copiar
+Editar
+Authorization: Api-Key SUA_CHAVE_AQUI
+As chaves são gerenciadas manualmente ou via endpoint (se implementado).
 
-Você pode importar a [coleção Postman](CursosRealizados.postman_collection.json) no Postman para testar todos os endpoints.
+⛔ Rate Limiting
+Limite configurado por IP para evitar abuso da API
 
----
+Cabeçalhos retornados:
 
-## 📋 Exemplo de Requisições
+makefile
+Copiar
+Editar
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 95
+Excesso de requisições retorna HTTP 429 Too Many Requests
 
-### Criar uma escola
-```json
-POST /escolas
-{
-  "nome": "Alura",
-  "local": "Online",
-  "site": "https://www.alura.com.br"
-}
-```
+🔁 Idempotência
+Para garantir que um POST não seja executado duas vezes por engano, use o cabeçalho:
 
-### Criar uma linguagem
-```json
-POST /linguagens
-{
-  "nome": "Java",
-  "tipo": "BACKEND",
-  "descricao": "Linguagem voltada ao desenvolvimento backend"
-}
-```
+makefile
+Copiar
+Editar
+Idempotency-Key: um_valor_unico
+Se a mesma chave for usada novamente, a API retorna a mesma resposta da primeira requisição.
 
-### Criar um curso
-```json
-POST /cursos
-{
-  "nome": "Formação Java",
-  "descricao": "Curso completo de Java com orientação a objetos",
-  "cargaHoraria": 40,
-  "dataConclusao": "2024-05-10",
-  "escola": {
-    "id": 1
-  },
-  "linguagensAprendidas": [
-    { "id": 1 }
-  ]
-}
-```
+🌐 Documentação da API
+A interface Swagger UI está disponível em:
 
----
+bash
+Copiar
+Editar
+http://localhost:8080/q/swagger-ui
+Todos os endpoints estão documentados com exemplos, parâmetros, e códigos de resposta.
 
-## 📘 Observações
+📁 Estrutura do Projeto
+bash
+Copiar
+Editar
+src/main/java/
+├── org.acme.model/           # Entidades (Curso, Escola, LinguagemAprendida)
+├── org.acme.dtos/            # DTOs de entrada
+├── org.acme.resource/        # Endpoints REST (CursoResource, EscolaResource etc.)
+├── org.acme.service/         # Lógica de negócio (se aplicável)
+├── org.acme.filter/          # Filtros de autenticação e rate limiting
+└── org.acme.exception/       # Manipuladores globais de erro
 
-- Todos os dados são persistidos em um banco de dados H2 em memória.
-- O projeto pode ser reiniciado a qualquer momento sem necessidade de configuração adicional.
-- A documentação completa pode ser acessada via Swagger UI após iniciar o projeto.
+src/main/resources/
+├── application.properties    # Configurações do Quarkus
+🛠️ Executando o Projeto
+bash
+Copiar
+Editar
+./mvnw quarkus:dev
+Acesse: http://localhost:8080/q/swagger-ui
+
+📌 Endpoints Principais
+Método	Rota	Descrição
+GET	/api/v1/cursos	Lista todos os cursos
+POST	/api/v1/cursos	Cadastra novo curso (idempotente)
+PUT	/api/v1/cursos/{id}	Atualiza um curso existente
+DELETE	/api/v1/cursos/{id}	Remove um curso
+GET	/api/v1/escolas	Lista todas as escolas
+POST	/api/v1/linguagens	Cadastra nova linguagem aprendida
+
+🧪 Testes (opcional)
+Testes podem ser adicionados com JUnit e RestAssured.
+
+📃 Licença
+Este projeto é apenas para fins acadêmicos e de aprendizado. Não possui licença comercial.
