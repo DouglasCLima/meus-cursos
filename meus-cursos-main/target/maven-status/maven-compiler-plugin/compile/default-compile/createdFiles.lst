@@ -1,0 +1,10 @@
+org\acme\MyEntityResource.class
+org\acme\resource\LinguagemAprendidaResource.class
+org\acme\resource\EscolaResource.class
+org\acme\MyEntity.class
+org\acme\model\Curso.class
+org\acme\model\LinguagemAprendida.class
+org\acme\resource\CursoResource.class
+org\acme\GreetingResource.class
+org\acme\model\Escola.class
+MavenWrapperDownloader.class
