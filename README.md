@@ -99,7 +99,6 @@ src/main/java/
 ├── org.acme.service/         # Lógica de negócio (se aplicável)
 ├── org.acme.filter/          # Filtros de autenticação e rate limiting
 └── org.acme.exception/       # Manipuladores globais de erro
-
 src/main/resources/
 ├── application.properties    # Configurações do Quarkus
 🛠️ Executando o Projeto
