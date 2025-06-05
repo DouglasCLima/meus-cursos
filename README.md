@@ -28,7 +28,8 @@ Maven
 📦 Funcionalidades Implementadas
 
 1. CRUD Completo
-   Escolas: criação, listagem, atualização e remoção
+
+Escolas: criação, listagem, atualização e remoção
 
 Cursos: com associação a escolas e suporte a datas
 
