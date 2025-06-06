@@ -11,9 +11,6 @@ public class Escola extends PanacheEntity {
     @NotBlank
     public String nome;
 
-    @NotBlank
-    public String pais;
-
     @OneToMany(mappedBy = "escola", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Curso> cursos;
 }

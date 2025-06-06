@@ -14,5 +14,5 @@ public class LinguagemAprendidaDTO {
 
     @NotNull(message = "O nível é obrigatório")
     @Schema(description = "Nível de conhecimento", example = "INTERMEDIARIO", required = true)
-    public NivelConhecimento nivel;  // usar o enum correto aqui
+    public NivelConhecimento nivel;
 }
